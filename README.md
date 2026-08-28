@@ -50,37 +50,41 @@ The environment uses constrained-random stimulus, protocol assertions, functiona
 ## Verification Environment Architecture
 
 ```text
-                           +----------------------+
-                           |       UVM Test       |
-                           +----------+-----------+
-                                      |
-                           +----------v-----------+
-                           |    Environment       |
-                           +----------+-----------+
-                                      |
-                 +--------------------+--------------------+
-                 |                    |                    |
-        +--------v--------+  +--------v--------+  +--------v--------+
-        | Master Agent    |  | Virtual          |  | Slave Agent     |
-        |                 |  | Sequencer        |  |                 |
-        | +-------------+ |  |                  |  | +-------------+ |
-        | | Sequencer   | |  | Master           |  | | Driver      | |
-        | +-------------+ |  | Sequencer        |  | +-------------+ |
-        | | Driver      | |  +------------------+  | | Monitor     | |
-        | +-------------+ |                        | +------+------+
-        | | Monitor     | |                        +--------|--------+
-        | +------+------+ |                                 |
-        +--------|--------+                                 |
-                 |                                          |
-                 |              AHB Interface               |
-                 +--------------------+---------------------+
-                                      |
-                         Analysis Transactions
-                                      |
-                         +------------v------------+
-                         |       Scoreboard        |
-                         |  + Functional Coverage  |
-                         +-------------------------+
+
+                              +----------------------+
+                              |      UVM TEST        |
+                              +----------+-----------+
+                                         |
+                                         v
+                              +----------------------+
+                              |     ENVIRONMENT      |
+                              |                      |
+                              |  +----------------+  |
+                              |  | Virtual        |  |
+                              |  | Sequencer      |  |
+                              |  +----------------+  |
+                              +----------+-----------+
+                                         |
+                    +--------------------+--------------------+
+                    |                    |                    |
+                    v                    v                    v
+           +----------------+    +----------------+    +----------------+
+           | Master Agent   |    | Slave Agent    |    | Scoreboard     |
+           |                |    |                |    |                |
+           | Sequencer      |    | Driver         |    | Master FIFO    |
+           | Driver         |    | Monitor        |    | Slave FIFO     |
+           | Monitor        |    |                |    | Compare        |
+           +-------+--------+    +-------+--------+    +----------------+
+                   |                     |
+                   |                     |
+                   +----------+----------+
+                              |
+                              v
+                    +----------------------+
+                    |                      |
+                    |      AHB Interface   |
+                    |                      |
+                    +----------------------+
 ```
 
 ---
@@ -682,10 +686,10 @@ The same seed values are configured for both Questa and VCS runs.
 
 ---
 
-# Author
+## Author
 
 **Chandirapriyan K**
 
-VLSI Design and Verification Engineer
+Design Verification | RTL Design
 
-SystemVerilog | UVM | SVA | Functional Coverage | AMBA Protocols
+**Skills:** SystemVerilog, UVM, AHB, SystemVerilog Assertions (SVA), Functional Coverage, Constrained-Random Verification, TLM, QuestaSim, Synopsys VCS, Linux
