@@ -1,63 +1,32 @@
 //------------------------------------------------------------------------------
-// Master Agent
+// Master Configuration
 //------------------------------------------------------------------------------
 
-class mst_agent extends uvm_agent;
+class mst_config extends uvm_object;
 
-    `uvm_component_utils(mst_agent)
+    `uvm_object_utils(mst_config)
 
 
     //--------------------------------------------------------------------------
-    // Agent Components and Configuration
+    // Virtual Interface
     //--------------------------------------------------------------------------
 
-    mst_sequencer seqr;
-    mst_driver    drv;
-    mst_monitor   mon;
-    mst_config    cfg;
+    virtual ahb_if vif;
+
+
+    //--------------------------------------------------------------------------
+    // Agent Configuration
+    //--------------------------------------------------------------------------
+
+    uvm_active_passive_enum is_active = UVM_ACTIVE;
 
 
     //--------------------------------------------------------------------------
     // Constructor
     //--------------------------------------------------------------------------
 
-    function new(string name = "mst_agent",
-                 uvm_component parent);
-        super.new(name, parent);
-    endfunction
-
-
-    //--------------------------------------------------------------------------
-    // Build Phase
-    //--------------------------------------------------------------------------
-
-    function void build_phase(uvm_phase phase);
-        super.build_phase(phase);
-
-        if (!uvm_config_db#(mst_config)::get(
-                this, "", "mst_config", cfg))
-            `uvm_fatal("MASTER DRIVER CONFIG", "FAILED")
-
-        // Monitor is created for both active and passive agents
-        mon = mst_monitor::type_id::create("mon", this);
-
-        // Driver and sequencer are required only for an active agent
-        if (is_active == UVM_ACTIVE) begin
-            drv  = mst_driver::type_id::create("drv", this);
-            seqr = mst_sequencer::type_id::create("seqr", this);
-        end
-    endfunction
-
-
-    //--------------------------------------------------------------------------
-    // Connect Phase
-    //--------------------------------------------------------------------------
-
-    function void connect_phase(uvm_phase phase);
-        super.connect_phase(phase);
-
-        if (is_active == UVM_ACTIVE)
-            drv.seq_item_port.connect(seqr.seq_item_export);
+    function new(string name = "mst_config");
+        super.new(name);
     endfunction
 
 endclass
