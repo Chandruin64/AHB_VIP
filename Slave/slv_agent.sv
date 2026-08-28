@@ -35,7 +35,7 @@ class slv_agent extends uvm_agent;
 
         if (!uvm_config_db#(slv_config)::get(
                 this, "", "slv_config", cfg))
-            `uvm_fatal("MASTER DRIVER CONFIG", "FAILED")
+            `uvm_fatal("SLAVE DRIVER CONFIG", "FAILED")
 
         // Monitor is created for both active and passive agents
         mon = slv_monitor::type_id::create("mon", this);
