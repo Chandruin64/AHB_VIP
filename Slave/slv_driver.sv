@@ -91,23 +91,6 @@ class slv_driver extends uvm_driver#(slv_xtn);
         xtn.HWRITE = vif.slv_drv_cb.HWRITE;
 
 
-        // Determine burst length
-        if (xtn.HBURST == 0)
-            xtn.length = 1;
-        else if ((xtn.HBURST == 2) || (xtn.HBURST == 3))
-            xtn.length = 4;
-        else if ((xtn.HBURST == 4) || (xtn.HBURST == 5))
-            xtn.length = 8;
-        else if ((xtn.HBURST == 6) || (xtn.HBURST == 7))
-            xtn.length = 16;
-        else
-            xtn.length = $urandom;
-
-
-        // Allocate read data storage
-        xtn.HRDATA = new[xtn.length];
-
-
         @(vif.slv_drv_cb);
 
 
