@@ -8,11 +8,10 @@ class virtual_sequencer extends uvm_sequencer#(uvm_sequence_item);
 
 
     //--------------------------------------------------------------------------
-    // Physical Sequencer Handles
+    // Physical Sequencer Handle
     //--------------------------------------------------------------------------
 
     mst_sequencer mst_seqr;
-    slv_sequencer slv_seqr;
 
 
     //--------------------------------------------------------------------------
