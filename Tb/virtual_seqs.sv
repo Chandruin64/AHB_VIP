@@ -13,7 +13,6 @@ class virtual_seqs extends uvm_sequence#(uvm_sequence_item);
 
     virtual_sequencer vseqr;
     mst_sequencer     mst_seqr;
-    slv_sequencer     slv_seqr;
 
 
     //--------------------------------------------------------------------------
@@ -38,7 +37,6 @@ class virtual_seqs extends uvm_sequence#(uvm_sequence_item);
             )
 
         mst_seqr = vseqr.mst_seqr;
-        slv_seqr = vseqr.slv_seqr;
 
     endtask
 
