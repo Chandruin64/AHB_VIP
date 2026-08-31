@@ -42,7 +42,7 @@ class mst_agent extends uvm_agent;
         mon = mst_monitor::type_id::create("mon", this);
 
         // Driver and sequencer are required only for an active agent
-        if (is_active == UVM_ACTIVE) begin
+        if (cfg.is_active == UVM_ACTIVE) begin
             drv  = mst_driver::type_id::create("drv", this);
             seqr = mst_sequencer::type_id::create("seqr", this);
         end
@@ -56,7 +56,7 @@ class mst_agent extends uvm_agent;
     function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
 
-        if (is_active == UVM_ACTIVE)
+        if (cfg.is_active == UVM_ACTIVE)
             drv.seq_item_port.connect(seqr.seq_item_export);
     endfunction
 
